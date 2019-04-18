@@ -19,6 +19,8 @@ public class Friend implements Serializable {
 
 	private String firstnameFriend;
 
+	private int idRole;
+
 	private String lastnameFriend;
 
 	private String mailFriend;
@@ -44,9 +46,9 @@ public class Friend implements Serializable {
 	@OneToMany(mappedBy="friend")
 	private List<FriendList> friendLists;
 
-	//bi-directional many-to-one association to RoleFriend
+	//bi-directional many-to-one association to RoleList
 	@OneToMany(mappedBy="friend")
-	private List<RoleFriend> roleFriends;
+	private List<RoleList> roleLists;
 
 	public Friend() {
 	}
@@ -65,6 +67,14 @@ public class Friend implements Serializable {
 
 	public void setFirstnameFriend(String firstnameFriend) {
 		this.firstnameFriend = firstnameFriend;
+	}
+
+	public int getIdRole() {
+		return this.idRole;
+	}
+
+	public void setIdRole(int idRole) {
+		this.idRole = idRole;
 	}
 
 	public String getLastnameFriend() {
@@ -129,26 +139,26 @@ public class Friend implements Serializable {
 		return friendList;
 	}
 
-	public List<RoleFriend> getRoleFriends() {
-		return this.roleFriends;
+	public List<RoleList> getRoleLists() {
+		return this.roleLists;
 	}
 
-	public void setRoleFriends(List<RoleFriend> roleFriends) {
-		this.roleFriends = roleFriends;
+	public void setRoleLists(List<RoleList> roleLists) {
+		this.roleLists = roleLists;
 	}
 
-	public RoleFriend addRoleFriend(RoleFriend roleFriend) {
-		getRoleFriends().add(roleFriend);
-		roleFriend.setFriend(this);
+	public RoleList addRoleList(RoleList roleList) {
+		getRoleLists().add(roleList);
+		roleList.setFriend(this);
 
-		return roleFriend;
+		return roleList;
 	}
 
-	public RoleFriend removeRoleFriend(RoleFriend roleFriend) {
-		getRoleFriends().remove(roleFriend);
-		roleFriend.setFriend(null);
+	public RoleList removeRoleList(RoleList roleList) {
+		getRoleLists().remove(roleList);
+		roleList.setFriend(null);
 
-		return roleFriend;
+		return roleList;
 	}
 
 }

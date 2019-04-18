@@ -18,6 +18,11 @@ public class TypeItem implements Serializable {
 
 	private String nameTypeItem;
 
+	//bi-directional many-to-one association to Item
+	@ManyToOne
+	@JoinColumn(name="idItem")
+	private Item item;
+
 	public TypeItem() {
 	}
 
@@ -35,6 +40,14 @@ public class TypeItem implements Serializable {
 
 	public void setNameTypeItem(String nameTypeItem) {
 		this.nameTypeItem = nameTypeItem;
+	}
+
+	public Item getItem() {
+		return this.item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
 }

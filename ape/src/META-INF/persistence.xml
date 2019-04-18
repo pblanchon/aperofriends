@@ -3,9 +3,6 @@
 	<persistence-unit name="ape">
 		<class>model.User</class>
 		<class>model.AccountFriend</class>
-		<class>model.Address</class>
-		<class>model.AddressFriend</class>
-		<class>model.AddressFriendPK</class>
 		<class>model.Bucket</class>
 		<class>model.BucketPK</class>
 		<class>model.Command</class>
@@ -13,12 +10,7 @@
 		<class>model.FriendList</class>
 		<class>model.FriendListPK</class>
 		<class>model.Item</class>
-		<class>model.RoleFriend</class>
-		<class>model.RoleFriendPK</class>
 		<class>model.RoleList</class>
-		<class>model.RoleSeller</class>
-		<class>model.RoleSellerPK</class>
-		<class>model.Seller</class>
 		<class>model.TypeItem</class>
 	</persistence-unit>
 </persistence>

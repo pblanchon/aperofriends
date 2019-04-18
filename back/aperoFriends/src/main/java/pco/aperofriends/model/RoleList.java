@@ -16,7 +16,14 @@ public class RoleList implements Serializable {
 	@Id
 	private int idRole;
 
+	private int idUSER;
+
 	private String nomRole;
+
+	//bi-directional many-to-one association to Friend
+	@ManyToOne
+	@JoinColumn(name="idFriend")
+	private Friend friend;
 
 	public RoleList() {
 	}
@@ -29,12 +36,28 @@ public class RoleList implements Serializable {
 		this.idRole = idRole;
 	}
 
+	public int getIdUSER() {
+		return this.idUSER;
+	}
+
+	public void setIdUSER(int idUSER) {
+		this.idUSER = idUSER;
+	}
+
 	public String getNomRole() {
 		return this.nomRole;
 	}
 
 	public void setNomRole(String nomRole) {
 		this.nomRole = nomRole;
+	}
+
+	public Friend getFriend() {
+		return this.friend;
+	}
+
+	public void setFriend(Friend friend) {
+		this.friend = friend;
 	}
 
 }

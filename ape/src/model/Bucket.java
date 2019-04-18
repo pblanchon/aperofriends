@@ -16,7 +16,7 @@ public class Bucket implements Serializable {
 	@EmbeddedId
 	private BucketPK id;
 
-	private int totalItem;
+	private String listItem;
 
 	//bi-directional many-to-one association to Command
 	@ManyToOne
@@ -39,12 +39,12 @@ public class Bucket implements Serializable {
 		this.id = id;
 	}
 
-	public int getTotalItem() {
-		return this.totalItem;
+	public String getListItem() {
+		return this.listItem;
 	}
 
-	public void setTotalItem(int totalItem) {
-		this.totalItem = totalItem;
+	public void setListItem(String listItem) {
+		this.listItem = listItem;
 	}
 
 	public Command getCommand() {

@@ -29,9 +29,9 @@ public class Item implements Serializable {
 	@OneToMany(mappedBy="item")
 	private List<Bucket> buckets;
 
-	//bi-directional many-to-many association to Seller
-	@ManyToMany(mappedBy="items")
-	private List<Seller> sellers;
+	//bi-directional many-to-one association to TypeItem
+	@OneToMany(mappedBy="item")
+	private List<TypeItem> typeItems;
 
 	public Item() {
 	}
@@ -98,12 +98,26 @@ public class Item implements Serializable {
 		return bucket;
 	}
 
-	public List<Seller> getSellers() {
-		return this.sellers;
+	public List<TypeItem> getTypeItems() {
+		return this.typeItems;
 	}
 
-	public void setSellers(List<Seller> sellers) {
-		this.sellers = sellers;
+	public void setTypeItems(List<TypeItem> typeItems) {
+		this.typeItems = typeItems;
+	}
+
+	public TypeItem addTypeItem(TypeItem typeItem) {
+		getTypeItems().add(typeItem);
+		typeItem.setItem(this);
+
+		return typeItem;
+	}
+
+	public TypeItem removeTypeItem(TypeItem typeItem) {
+		getTypeItems().remove(typeItem);
+		typeItem.setItem(null);
+
+		return typeItem;
 	}
 
 }

@@ -17,6 +17,8 @@ public class AccountFriend implements Serializable {
 	@Id
 	private int idAF;
 
+	private String addressAccount;
+
 	private String nameAccount;
 
 	public AccountFriend() {
@@ -28,6 +30,14 @@ public class AccountFriend implements Serializable {
 
 	public void setIdAF(int idAF) {
 		this.idAF = idAF;
+	}
+
+	public String getAddressAccount() {
+		return this.addressAccount;
+	}
+
+	public void setAddressAccount(String addressAccount) {
+		this.addressAccount = addressAccount;
 	}
 
 	public String getNameAccount() {
