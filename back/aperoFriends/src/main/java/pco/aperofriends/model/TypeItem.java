@@ -1,33 +1,36 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 /**
- * The persistent class for the typeItem database table.
+ * The persistent class for the TYPEITEM database table.
  * 
  */
 @Entity
-@NamedQuery(name="TypeItem.findAll", query="SELECT t FROM TypeItem t")
+//@NamedQuery(name="Typeitem.findAll", query="SELECT t FROM Typeitem t")
 public class TypeItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTypeItem;
 
 	private String nameTypeItem;
-
-	//bi-directional many-to-one association to Item
-	@ManyToOne
-	@JoinColumn(name="idItem")
-	private Item item;
-
-	public TypeItem() {
-	}
+	
+	@OneToMany(mappedBy="typeItem")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Set<Item> items = new HashSet<Item>();
 
 	public int getIdTypeItem() {
-		return this.idTypeItem;
+		return idTypeItem;
 	}
 
 	public void setIdTypeItem(int idTypeItem) {
@@ -35,19 +38,34 @@ public class TypeItem implements Serializable {
 	}
 
 	public String getNameTypeItem() {
-		return this.nameTypeItem;
+		return nameTypeItem;
 	}
 
 	public void setNameTypeItem(String nameTypeItem) {
 		this.nameTypeItem = nameTypeItem;
 	}
 
-	public Item getItem() {
-		return this.item;
+	public Set<Item> getItems() {
+		return items;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setItems(Set<Item> items) {
+		this.items = items;
 	}
 
+	public TypeItem() {
+	}
+
+	public TypeItem(int idTypeItem, String nameTypeItem, Set<Item> items) {
+		super();
+		this.idTypeItem = idTypeItem;
+		this.nameTypeItem = nameTypeItem;
+		this.items = items;
+	}
+
+	@Override
+	public String toString() {
+		return "TypeItem [idTypeItem=" + idTypeItem + ", nameTypeItem=" + nameTypeItem + ", items=" + items + "]";
+	}
+	
 }

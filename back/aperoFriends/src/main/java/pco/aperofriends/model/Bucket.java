@@ -1,66 +1,69 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 
 /**
- * The persistent class for the bucket database table.
+ * The persistent class for the BUCKET database table.
  * 
  */
 @Entity
-@NamedQuery(name="Bucket.findAll", query="SELECT b FROM Bucket b")
+//@NamedQuery(name="Bucket.findAll", query="SELECT b FROM Bucket b")
 public class Bucket implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private BucketPK id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idBucket;
 
-	private String listItem;
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "idFriend")
+	private Friend buyer;
+	
+	@ManyToMany
+	@JoinTable(name = "bucket_items", joinColumns = @JoinColumn(name = "idBucket"), inverseJoinColumns = @JoinColumn(name="idItem"))
+	private Set<Item> items = new HashSet<Item>();
 
-	//bi-directional many-to-one association to Command
-	@ManyToOne
-	@JoinColumn(name="nbCommand")
-	private Command command;
-
-	//bi-directional many-to-one association to Item
-	@ManyToOne
-	@JoinColumn(name="idItem")
-	private Item item;
-
-	public Bucket() {
+	public int getIdBucket() {
+		return idBucket;
 	}
 
-	public BucketPK getId() {
-		return this.id;
+	public void setIdBucket(int idBucket) {
+		this.idBucket = idBucket;
 	}
 
-	public void setId(BucketPK id) {
-		this.id = id;
+	public Friend getBuyer() {
+		return buyer;
 	}
 
-	public String getListItem() {
-		return this.listItem;
+	public void setBuyer(Friend buyer) {
+		this.buyer = buyer;
 	}
 
-	public void setListItem(String listItem) {
-		this.listItem = listItem;
+	public Set<Item> getItems() {
+		return items;
 	}
 
-	public Command getCommand() {
-		return this.command;
+	public void setItems(Set<Item> items) {
+		this.items = items;
 	}
 
-	public void setCommand(Command command) {
-		this.command = command;
+	@Override
+	public String toString() {
+		return "Bucket [idBucket=" + idBucket + ", buyer=" + buyer + ", items=" + items + "]";
 	}
 
-	public Item getItem() {
-		return this.item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
-	}
 
 }

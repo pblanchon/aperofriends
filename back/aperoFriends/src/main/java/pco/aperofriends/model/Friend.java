@@ -1,60 +1,51 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
- * The persistent class for the friend database table.
+ * The persistent class for the FRIEND database table.
  * 
  */
 @Entity
-@NamedQuery(name="Friend.findAll", query="SELECT f FROM Friend f")
+//@NamedQuery(name="Friend.findAll", query="SELECT f FROM Friend f")
 public class Friend implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idFriend;
-
+	
+	@Size(max = 50)
 	private String firstnameFriend;
 
-	private int idRole;
-
+	@Size(max = 50)
 	private String lastnameFriend;
 
+	@Size(max = 50)
 	private String mailFriend;
 
 	private String passFriend;
-
-	private String phoneFriend;
-
-	//bi-directional many-to-many association to Command
-	@ManyToMany
-	@JoinTable(
-		name="friendCommand"
-		, joinColumns={
-			@JoinColumn(name="idFriend")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="nbCommand")
-			}
-		)
-	private List<Command> commands;
-
-	//bi-directional many-to-one association to FriendList
-	@OneToMany(mappedBy="friend")
-	private List<FriendList> friendLists;
-
-	//bi-directional many-to-one association to RoleList
-	@OneToMany(mappedBy="friend")
-	private List<RoleList> roleLists;
-
-	public Friend() {
-	}
+	
+	@Size(max = 50)
+	private String phonefriend;
+	
+	@OneToMany(mappedBy="buyer")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnoreProperties("buyer")
+	private List<Bucket> buckets;
 
 	public int getIdFriend() {
-		return this.idFriend;
+		return idFriend;
 	}
 
 	public void setIdFriend(int idFriend) {
@@ -62,23 +53,15 @@ public class Friend implements Serializable {
 	}
 
 	public String getFirstnameFriend() {
-		return this.firstnameFriend;
+		return firstnameFriend;
 	}
 
 	public void setFirstnameFriend(String firstnameFriend) {
 		this.firstnameFriend = firstnameFriend;
 	}
 
-	public int getIdRole() {
-		return this.idRole;
-	}
-
-	public void setIdRole(int idRole) {
-		this.idRole = idRole;
-	}
-
 	public String getLastnameFriend() {
-		return this.lastnameFriend;
+		return lastnameFriend;
 	}
 
 	public void setLastnameFriend(String lastnameFriend) {
@@ -86,7 +69,7 @@ public class Friend implements Serializable {
 	}
 
 	public String getMailFriend() {
-		return this.mailFriend;
+		return mailFriend;
 	}
 
 	public void setMailFriend(String mailFriend) {
@@ -94,71 +77,49 @@ public class Friend implements Serializable {
 	}
 
 	public String getPassFriend() {
-		return this.passFriend;
+		return passFriend;
 	}
 
 	public void setPassFriend(String passFriend) {
 		this.passFriend = passFriend;
 	}
 
-	public String getPhoneFriend() {
-		return this.phoneFriend;
+	public String getPhonefriend() {
+		return phonefriend;
 	}
 
-	public void setPhoneFriend(String phoneFriend) {
-		this.phoneFriend = phoneFriend;
+	public void setPhonefriend(String phonefriend) {
+		this.phonefriend = phonefriend;
+	}
+	
+	public List<Bucket> getBuckets() {
+		return buckets;
 	}
 
-	public List<Command> getCommands() {
-		return this.commands;
+	public void setBuckets(List<Bucket> buckets) {
+		this.buckets = buckets;
 	}
 
-	public void setCommands(List<Command> commands) {
-		this.commands = commands;
+	public Friend() {
+		
 	}
 
-	public List<FriendList> getFriendLists() {
-		return this.friendLists;
+	public Friend(int idFriend, String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend,
+			String phonefriend, List<Bucket> buckets) {
+		super();
+		this.idFriend = idFriend;
+		this.firstnameFriend = firstnameFriend;
+		this.lastnameFriend = lastnameFriend;
+		this.mailFriend = mailFriend;
+		this.passFriend = passFriend;
+		this.phonefriend = phonefriend;
+		this.buckets = buckets;
 	}
 
-	public void setFriendLists(List<FriendList> friendLists) {
-		this.friendLists = friendLists;
-	}
-
-	public FriendList addFriendList(FriendList friendList) {
-		getFriendLists().add(friendList);
-		friendList.setFriend(this);
-
-		return friendList;
-	}
-
-	public FriendList removeFriendList(FriendList friendList) {
-		getFriendLists().remove(friendList);
-		friendList.setFriend(null);
-
-		return friendList;
-	}
-
-	public List<RoleList> getRoleLists() {
-		return this.roleLists;
-	}
-
-	public void setRoleLists(List<RoleList> roleLists) {
-		this.roleLists = roleLists;
-	}
-
-	public RoleList addRoleList(RoleList roleList) {
-		getRoleLists().add(roleList);
-		roleList.setFriend(this);
-
-		return roleList;
-	}
-
-	public RoleList removeRoleList(RoleList roleList) {
-		getRoleLists().remove(roleList);
-		roleList.setFriend(null);
-
-		return roleList;
-	}
-
+	@Override
+	public String toString() {
+		return "Friend [idFriend=" + idFriend + ", firstnameFriend=" + firstnameFriend + ", lastnameFriend="
+				+ lastnameFriend + ", mailFriend=" + mailFriend + ", passFriend=" + passFriend + ", phonefriend="
+				+ phonefriend + ", buckets=" + buckets + "]";
+	}	
 }

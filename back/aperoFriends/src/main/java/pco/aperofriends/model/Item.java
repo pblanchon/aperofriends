@@ -1,59 +1,83 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
- * The persistent class for the item database table.
+ * The persistent class for the ITEM database table.
  * 
  */
 @Entity
-@NamedQuery(name="Item.findAll", query="SELECT i FROM Item i")
+//@NamedQuery(name="Item.findAll", query="SELECT i FROM Item i")
 public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idItem;
 
-	private int idTypeItem;
+	private int amount;
 
 	private String nameItem;
 
 	private int priceItem;
-
-	private int stock;
-
-	//bi-directional many-to-one association to Bucket
-	@OneToMany(mappedBy="item")
+	
+	@OneToOne(cascade=CascadeType.REFRESH)
+	@JsonIgnoreProperties("items")
+	@JoinColumn(name="idTypeIteù")
+	private TypeItem typeItem;
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "items", cascade = CascadeType.REMOVE)
 	private List<Bucket> buckets;
 
-	//bi-directional many-to-one association to TypeItem
-	@OneToMany(mappedBy="item")
-	private List<TypeItem> typeItems;
-
-	public Item() {
-	}
-
 	public int getIdItem() {
-		return this.idItem;
+		return idItem;
 	}
 
 	public void setIdItem(int idItem) {
 		this.idItem = idItem;
 	}
 
-	public int getIdTypeItem() {
-		return this.idTypeItem;
+	public int getAmount() {
+		return amount;
 	}
 
-	public void setIdTypeItem(int idTypeItem) {
-		this.idTypeItem = idTypeItem;
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public TypeItem getTypeItem() {
+		return typeItem;
+	}
+
+	public void setTypeItem(TypeItem typeItem) {
+		this.typeItem = typeItem;
+	}
+
+	public List<Bucket> getBuckets() {
+		return buckets;
+	}
+
+	public void setBuckets(List<Bucket> buckets) {
+		this.buckets = buckets;
 	}
 
 	public String getNameItem() {
-		return this.nameItem;
+		return nameItem;
 	}
 
 	public void setNameItem(String nameItem) {
@@ -61,63 +85,30 @@ public class Item implements Serializable {
 	}
 
 	public int getPriceItem() {
-		return this.priceItem;
+		return priceItem;
 	}
 
 	public void setPriceItem(int priceItem) {
 		this.priceItem = priceItem;
 	}
 
-	public int getStock() {
-		return this.stock;
+	public Item() {
 	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-
-	public List<Bucket> getBuckets() {
-		return this.buckets;
-	}
-
-	public void setBuckets(List<Bucket> buckets) {
+	public Item(int idItem, int amount, String nameItem, int priceItem, TypeItem typeItem, List<Bucket> buckets) {
+		super();
+		this.idItem = idItem;
+		this.amount = amount;
+		this.nameItem = nameItem;
+		this.priceItem = priceItem;
+		this.typeItem = typeItem;
 		this.buckets = buckets;
 	}
 
-	public Bucket addBucket(Bucket bucket) {
-		getBuckets().add(bucket);
-		bucket.setItem(this);
-
-		return bucket;
-	}
-
-	public Bucket removeBucket(Bucket bucket) {
-		getBuckets().remove(bucket);
-		bucket.setItem(null);
-
-		return bucket;
-	}
-
-	public List<TypeItem> getTypeItems() {
-		return this.typeItems;
-	}
-
-	public void setTypeItems(List<TypeItem> typeItems) {
-		this.typeItems = typeItems;
-	}
-
-	public TypeItem addTypeItem(TypeItem typeItem) {
-		getTypeItems().add(typeItem);
-		typeItem.setItem(this);
-
-		return typeItem;
-	}
-
-	public TypeItem removeTypeItem(TypeItem typeItem) {
-		getTypeItems().remove(typeItem);
-		typeItem.setItem(null);
-
-		return typeItem;
+	@Override
+	public String toString() {
+		return "Item [idItem=" + idItem + ", amount=" + amount + ", nameItem=" + nameItem + ", priceItem=" + priceItem
+				+ ", typeItem=" + typeItem + ", buckets=" + buckets + "]";
 	}
 
 }

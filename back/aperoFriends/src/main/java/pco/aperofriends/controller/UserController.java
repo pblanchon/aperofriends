@@ -19,7 +19,7 @@ import pco.aperofriends.model.User;
 import pco.aperofriends.repository.UserRepository;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 public class UserController {
 
 	@Autowired
@@ -58,12 +58,11 @@ public class UserController {
 	@PutMapping("/updateUser")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
 	public ResponseEntity<?> updateUser(@RequestBody User user) {
-
 		User updateUser = userRepository.save(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(updateUser);
 	}
 
-	@DeleteMapping("/deleteUser/{id}")
+/*	@DeleteMapping("/deleteUser/{id}")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
 	public ResponseEntity<?> deleteUser(@PathVariable Integer idUser) {
 		userRepository.deleteById(idUser);
@@ -74,7 +73,7 @@ public class UserController {
 		Optional<User> users = userRepository.findById(idUser);
 		return ResponseEntity.status(HttpStatus.OK).body(users);
 	}
-	
+	*/
 }
     
 

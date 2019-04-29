@@ -16,6 +16,6 @@ public interface UserService {
 	
 	User createUser(User newUser);
 	
-	User saveUser(User user);
-	
+	User updateUser(User user);
+		
  }

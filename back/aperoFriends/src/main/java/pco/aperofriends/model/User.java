@@ -5,16 +5,16 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the User database table.
+ * The persistent class for the USER database table.
  * 
  */
 @Entity
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+//@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int idUSER;
+	private int idUser;
 
 	private String firstnameUser;
 
@@ -26,19 +26,16 @@ public class User implements Serializable {
 
 	private String passUser;
 
-	public User() {
+	public int getIdUser() {
+		return idUser;
 	}
 
-	public int getIdUSER() {
-		return this.idUSER;
-	}
-
-	public void setIdUSER(int idUSER) {
-		this.idUSER = idUSER;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getFirstnameUser() {
-		return this.firstnameUser;
+		return firstnameUser;
 	}
 
 	public void setFirstnameUser(String firstnameUser) {
@@ -46,7 +43,7 @@ public class User implements Serializable {
 	}
 
 	public int getIdRole() {
-		return this.idRole;
+		return idRole;
 	}
 
 	public void setIdRole(int idRole) {
@@ -54,7 +51,7 @@ public class User implements Serializable {
 	}
 
 	public String getLastnameUser() {
-		return this.lastnameUser;
+		return lastnameUser;
 	}
 
 	public void setLastnameUser(String lastnameUser) {
@@ -62,7 +59,7 @@ public class User implements Serializable {
 	}
 
 	public String getMailUser() {
-		return this.mailUser;
+		return mailUser;
 	}
 
 	public void setMailUser(String mailUser) {
@@ -70,11 +67,32 @@ public class User implements Serializable {
 	}
 
 	public String getPassUser() {
-		return this.passUser;
+		return passUser;
 	}
 
 	public void setPassUser(String passUser) {
 		this.passUser = passUser;
 	}
+	
+	public User() {
+		
+	}
 
+	public User(int idUser, String firstnameUser, int idRole, String lastnameUser, String mailUser, String passUser) {
+		super();
+		this.idUser = idUser;
+		this.firstnameUser = firstnameUser;
+		this.idRole = idRole;
+		this.lastnameUser = lastnameUser;
+		this.mailUser = mailUser;
+		this.passUser = passUser;
+	}
+
+	@Override
+	public String toString() {
+		return "User [idUser=" + idUser + ", firstnameUser=" + firstnameUser + ", idRole=" + idRole + ", lastnameUser="
+				+ lastnameUser + ", mailUser=" + mailUser + ", passUser=" + passUser + "]";
+	}
+
+	
 }

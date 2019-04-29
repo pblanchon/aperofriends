@@ -19,7 +19,7 @@ import pco.aperofriends.model.Friend;
 import pco.aperofriends.repository.FriendRepository;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 public class FriendController {
 
 	@Autowired
@@ -31,7 +31,7 @@ public class FriendController {
 	 * @param model
 	 * @return friend
 	 */
-	@GetMapping("/friend")
+	@GetMapping("/friends")
 	public ResponseEntity<?> friends() {
 		List<Friend> friends = friendRepository.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(friends);// retourne la page friends
@@ -70,9 +70,10 @@ public class FriendController {
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 
+	// @PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/client/{id}")
 	public ResponseEntity<?> friend(@PathVariable Integer idFriend) {
-		Optional<Friend> friends = friendRepository.findById(idFriend);
-		return ResponseEntity.status(HttpStatus.OK).body(friends);
+		Optional<Friend> friendId = friendRepository.findById(idFriend);
+		return ResponseEntity.status(HttpStatus.OK).body(friendId);
 	}
-
 }
