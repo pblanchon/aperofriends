@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.TypeItem;
 import pco.aperofriends.repository.TypeItemRepository;
 
 @RestController
+@RequestMapping("/typeItem")
 @CrossOrigin("http://localhost:4200")
 public class TypeItemController {
 	
@@ -27,30 +29,26 @@ public class TypeItemController {
 	@GetMapping("/typeItems")
 	public ResponseEntity<?> typeItems() {
 		List<TypeItem> typeItems = typeItemRepository.findAll();
-
 		return ResponseEntity.status(HttpStatus.OK).body(typeItems);
 	}
 
 	@GetMapping("/typeItems/{id}")
 	public ResponseEntity<?> typeItem(@PathVariable Integer idTypeItem) {
 		Optional<TypeItem> typeItems = typeItemRepository.findById(idTypeItem);
-
 		return ResponseEntity.status(HttpStatus.OK).body(typeItems);
 	}
 
-	@PostMapping("/addTypeItem")
+	@PostMapping("/createTypeItem")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
-	public ResponseEntity<?> ajoutTypeItems(@RequestBody TypeItem typeItem) {
-		TypeItem typeItems = typeItemRepository.save(typeItem);
-
-		return ResponseEntity.status(HttpStatus.OK).body(typeItems);
+	public ResponseEntity<?> createTypeItems(@RequestBody TypeItem typeItem) {
+		TypeItem createTypeItems = typeItemRepository.save(typeItem);
+		return ResponseEntity.status(HttpStatus.OK).body(createTypeItems);
 	}
 
 	@PostMapping("/updateTypeItem")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
 	public ResponseEntity<?> updateTypeItem(@RequestBody TypeItem typeItem) {
 		TypeItem updateTypeItem = typeItemRepository.save(typeItem);
-
 		return ResponseEntity.status(HttpStatus.CREATED).body(updateTypeItem);
 	}
 
@@ -58,7 +56,6 @@ public class TypeItemController {
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
 	public ResponseEntity<?> deleteTypeItem(@PathVariable Integer idTypeItem) {
 		typeItemRepository.deleteById(idTypeItem);
-
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
 

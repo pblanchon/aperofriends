@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.AccountFriend;
 import pco.aperofriends.repository.AccountFriendRepository;
 
 @RestController
-//@CrossOrigin("http://localhost:4200")
+@RequestMapping("/accountFriend")
+@CrossOrigin("http://localhost:4200")
 public class AccountFriendController {
 	
 	@Autowired
@@ -31,7 +33,7 @@ public class AccountFriendController {
 	 * @param model
 	 * @return friend
 	 */
-	@GetMapping("/accountFriend")
+	@GetMapping("/accountFriends")
 	public ResponseEntity<?> AccountFriends() {
 		List<AccountFriend> accountFriends = accountFriendRepository.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(accountFriends);// retourne la page friends
@@ -68,11 +70,6 @@ public class AccountFriendController {
 	public ResponseEntity<?> deleteAccountFriend(@PathVariable Integer idAccountFriend) {
 		accountFriendRepository.deleteById(idAccountFriend);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
-	}
-
-	public ResponseEntity<?> accountFriend(@PathVariable Integer idAccountFriend) {
-		Optional<AccountFriend> accountFriends = accountFriendRepository.findById(idAccountFriend);
-		return ResponseEntity.status(HttpStatus.OK).body(accountFriends);
 	}
 */
 

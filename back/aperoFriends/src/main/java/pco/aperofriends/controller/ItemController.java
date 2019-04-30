@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +19,8 @@ import pco.aperofriends.model.Item;
 import pco.aperofriends.repository.ItemRepository;
 
 @RestController
-//@CrossOrigin("http://localhost:4200")
+@RequestMapping("/item")
+@CrossOrigin("http://localhost:4200")
 public class ItemController {
 	
 	@Autowired
@@ -27,12 +30,13 @@ public class ItemController {
 	 * Methode qui renvois l'ensemble des éléments de la table item
 	 * 
 	 * @param model
-	 * @return item
+	 * @return items
 	 */
-	@GetMapping("/item")
+	@GetMapping("/items")
 	public ResponseEntity<?> items() {
+		System.out.println("GetMapping items");
 		List<Item> items = itemRepository.findAll();
-		return ResponseEntity.status(HttpStatus.OK).body(items);// retourne la page item
+		return ResponseEntity.status(HttpStatus.OK).body(items);// retourne la page item	
 	}
 	
 	/**
@@ -60,7 +64,7 @@ public class ItemController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(updateItem);
 	}
 
-	@DeleteMapping("/Item/delete")
+	@DeleteMapping("/item/delete")
 	public void deleteItem(@RequestParam(name="idItem", required=true) Integer idItem) {
 		itemRepository.deleteById(idItem);
 	}

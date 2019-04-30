@@ -29,15 +29,13 @@ public class Item implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idItem;
 
-	private int amount;
-
 	private String nameItem;
 
 	private int priceItem;
 	
 	@OneToOne(cascade=CascadeType.REFRESH)
 	@JsonIgnoreProperties("items")
-	@JoinColumn(name="idTypeIteù")
+	@JoinColumn(name="idTypeItem")
 	private TypeItem typeItem;
 	
 	@JsonIgnore
@@ -50,14 +48,6 @@ public class Item implements Serializable {
 
 	public void setIdItem(int idItem) {
 		this.idItem = idItem;
-	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
 	}
 
 	public TypeItem getTypeItem() {
@@ -95,10 +85,9 @@ public class Item implements Serializable {
 	public Item() {
 	}
 
-	public Item(int idItem, int amount, String nameItem, int priceItem, TypeItem typeItem, List<Bucket> buckets) {
+	public Item(int idItem, String nameItem, int priceItem, TypeItem typeItem, List<Bucket> buckets) {
 		super();
 		this.idItem = idItem;
-		this.amount = amount;
 		this.nameItem = nameItem;
 		this.priceItem = priceItem;
 		this.typeItem = typeItem;
@@ -107,7 +96,7 @@ public class Item implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Item [idItem=" + idItem + ", amount=" + amount + ", nameItem=" + nameItem + ", priceItem=" + priceItem
+		return "Item [idItem=" + idItem + ", nameItem=" + nameItem + ", priceItem=" + priceItem
 				+ ", typeItem=" + typeItem + ", buckets=" + buckets + "]";
 	}
 

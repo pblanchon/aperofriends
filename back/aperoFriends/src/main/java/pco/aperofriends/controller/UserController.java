@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.User;
 import pco.aperofriends.repository.UserRepository;
 
 @RestController
-//@CrossOrigin("http://localhost:4200")
+@RequestMapping("/user")
+@CrossOrigin("http://localhost:4200")
 public class UserController {
 
 	@Autowired
@@ -31,7 +33,7 @@ public class UserController {
 	 * @param model
 	 * @return user
 	 */
-	@GetMapping("/user")
+	@GetMapping("/users")
 	public ResponseEntity<?> users() {
 		List<User> users = userRepository.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(users);// retourne la page users

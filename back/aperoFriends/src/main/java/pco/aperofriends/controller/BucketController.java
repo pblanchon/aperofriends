@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +18,8 @@ import pco.aperofriends.model.Bucket;
 import pco.aperofriends.repository.BucketRepository;
 
 @RestController
+@RequestMapping("/bucket")
+@CrossOrigin("http://localhost:4200")
 public class BucketController {
 	@Autowired
 	BucketRepository bucketRepository;
@@ -28,32 +32,32 @@ public class BucketController {
 		return ResponseEntity.status(HttpStatus.OK).body(buckets);
 	}
 	
-	@PostMapping("/buckets/createBucket")
+	@PostMapping("/createBucket")
 	//@PreAuthorize("hasRole('USER')")
-	public ResponseEntity<?> addBucket(@RequestBody Bucket bucket){
-		Bucket newBucket = bucketRepository.save(bucket);
-		return ResponseEntity.status(HttpStatus.CREATED).body(newBucket); 
+	public ResponseEntity<?> createBucket(@RequestBody Bucket bucket){
+		Bucket createBucket = bucketRepository.save(bucket);
+		return ResponseEntity.status(HttpStatus.CREATED).body(createBucket); 
 	}
 	
-	@PostMapping("/buckets/addItemBucket")
+	@PostMapping("/addItemBucket")
 	//@PreAuthorize("hasRole('USER')")
 	public void addItemBucket(@RequestParam(name="idBucket") Integer idBucket, @RequestParam(name="idItem") Integer idItem){
 		bucketRepository.addItem(idBucket, idItem);
 	}
 	
-	@DeleteMapping("/buckets/deleteItemeBucket")
+	@DeleteMapping("/deleteItemeBucket")
 	//@PreAuthorize("hasRole('USER')")
 	public void deleteItemeBucket(@RequestParam(name="idBucket") Integer idBucket, @RequestParam(name="idItem") Integer idItem){
 		bucketRepository.deleteItem(idBucket, idItem);
 	}
 	
-	@PostMapping("/buckets/finalBucket")
+	@PostMapping("/finalBucket")
 	//@PreAuthorize("hasRole('USER')")
 	public void finalBucket(@RequestParam(name="idBucket") Integer idBucket){
 		bucketRepository.finalBucket(idBucket);
 	}
 	
-	@DeleteMapping("/bucketss/delete")
+	@DeleteMapping("/delete")
 	//@PreAuthorize("hasRole('USER')")
 	public void deleteItem(@RequestParam(name="idItem", required=true) Integer idItem) {
 		bucketRepository.deleteById(idItem);

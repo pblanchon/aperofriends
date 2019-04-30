@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.Friend;
 import pco.aperofriends.repository.FriendRepository;
 
 @RestController
-//@CrossOrigin("http://localhost:4200")
+@RequestMapping("/friend")
+@CrossOrigin("http://localhost:4200")
 public class FriendController {
 
 	@Autowired
@@ -29,7 +31,7 @@ public class FriendController {
 	 * Methode qui renvois l'ensemble des éléments de la table friend
 	 * 
 	 * @param model
-	 * @return friend
+	 * @return friends
 	 */
 	@GetMapping("/friends")
 	public ResponseEntity<?> friends() {
@@ -58,7 +60,6 @@ public class FriendController {
 	@PutMapping("/updateFriend")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
 	public ResponseEntity<?> updateFriend(@RequestBody Friend friend) {
-
 		Friend updateFriend = friendRepository.save(friend);
 		return ResponseEntity.status(HttpStatus.CREATED).body(updateFriend);
 	}
@@ -71,7 +72,7 @@ public class FriendController {
 	}
 
 	// @PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/client/{id}")
+	@GetMapping("/friend/{id}")
 	public ResponseEntity<?> friend(@PathVariable Integer idFriend) {
 		Optional<Friend> friendId = friendRepository.findById(idFriend);
 		return ResponseEntity.status(HttpStatus.OK).body(friendId);
