@@ -20,7 +20,6 @@ import pco.aperofriends.model.User;
 import pco.aperofriends.repository.UserRepository;
 
 @RestController
-@RequestMapping("/user")
 @CrossOrigin("http://localhost:4200")
 public class UserController {
 
@@ -29,7 +28,6 @@ public class UserController {
 
 	/**
 	 * Methode qui renvois l'ensemble des éléments de la table user
-	 * 
 	 * @param model
 	 * @return user
 	 */

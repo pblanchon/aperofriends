@@ -23,6 +23,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FooterComponent } from './footer/footer.component';
 import { ItemComponent } from './item/item.component';
 import { LoginComponent } from './login/login.component';
+import {HttpClientModule} from '@angular/common/http';
+import { FriendComponent } from './friend/friend.component';
+import { ItemDetailComponent } from './item/item-detail/item-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,12 @@ import { LoginComponent } from './login/login.component';
     HeaderComponent,
     FooterComponent,
     ItemComponent,
-    LoginComponent
+    LoginComponent,
+    FriendComponent,
+    ItemDetailComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     AlertModule.forRoot(),

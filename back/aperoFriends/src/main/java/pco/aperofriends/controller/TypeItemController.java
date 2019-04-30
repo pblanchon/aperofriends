@@ -19,7 +19,6 @@ import pco.aperofriends.model.TypeItem;
 import pco.aperofriends.repository.TypeItemRepository;
 
 @RestController
-@RequestMapping("/typeItem")
 @CrossOrigin("http://localhost:4200")
 public class TypeItemController {
 	

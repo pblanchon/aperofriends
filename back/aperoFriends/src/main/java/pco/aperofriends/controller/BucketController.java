@@ -18,7 +18,6 @@ import pco.aperofriends.model.Bucket;
 import pco.aperofriends.repository.BucketRepository;
 
 @RestController
-@RequestMapping("/bucket")
 @CrossOrigin("http://localhost:4200")
 public class BucketController {
 	@Autowired

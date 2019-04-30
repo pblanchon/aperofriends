@@ -10,7 +10,7 @@ import {Injectable} from '@angular/core';
 
 export class FriendService {
   // la liste des Friends
-  private availableFriends: Friend[];
+  availableFriends: Friend[];
 
   // la liste observable que l'on rend visible partout dans l'appli
   availableFriends$: BehaviorSubject<Friend[]>= new BehaviorSubject(this.availableFriends);
@@ -23,7 +23,7 @@ export class FriendService {
    * La fonction getAllFriend() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   private getAllFriend(): Observable<Friend[]> {
-    return this.httpClient.get<Friend[]>('http://localhost:8080/friends');
+    return this.httpClient.get<Friend[]>('http://localhost:8080/aperofriends/friends');
   }
 
   /**
@@ -57,7 +57,7 @@ export class FriendService {
    * @param newFriend le nouveau friend à créer
    */
   public createFriend(newFriend: Friend) {
-    this.httpClient.post<Friend>('http://localhost:8080/friend', newFriend).subscribe(
+    this.httpClient.post<Friend>('http://localhost:8080//aperofriends/createFriend', newFriend).subscribe(
       newClient => {
         this.availableFriends.push(newFriend);
         this.availableFriends$.next(this.availableFriends);
@@ -70,7 +70,7 @@ export class FriendService {
    * @param friend
    */
   public updateFriend(friend: Friend) {
-    this.httpClient.put<Friend>('http://localhost:8080/friend', friend).subscribe(
+    this.httpClient.put<Friend>('http://localhost:8080//aperofriends/updateFriend', friend).subscribe(
       updatedFriend => {
         this.availableFriends$.next(this.availableFriends);
       }

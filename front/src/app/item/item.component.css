@@ -1,0 +1,9 @@
+.container-fluid {
+  overflow: auto;
+  font-size: 0.8vw;
+  vertical-align: middle;
+}
+
+.btn {
+  font-size: 0.8vw;
+}

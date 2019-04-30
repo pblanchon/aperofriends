@@ -9,8 +9,9 @@ import {Injectable} from '@angular/core';
 })
 
 export class ItemService {
+
   // la liste des Items
-  private availableItems: Item[];
+  availableItems: Item[];
 
   // la liste observable que l'on rend visible partout dans l'appli
   availableItems$: BehaviorSubject<Item[]>= new BehaviorSubject(this.availableItems);
@@ -23,7 +24,8 @@ export class ItemService {
    * La fonction getAllItem() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   public getAllItem(): Observable<Item[]> {
-    return this.httpClient.get<Item[]>('http://localhost:8080/aperofriends/Items');
+    console.log('getAllItems' + this.availableItems)
+    return this.httpClient.get<Item[]>('http://localhost:8080/aperofriends/items');
   }
 
   /**

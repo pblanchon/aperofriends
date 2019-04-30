@@ -1,0 +1,23 @@
+
+<h3 id="newItem"  >Ajout d'un nouvel Item:</h3>
+<h3 id="editItem" >Modifier un Item :</h3>
+
+<form>
+  <div class="form-group">
+    <label for="name">Name Item</label>
+    <input type="text" class="form-control" id="name" placeholder="" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem" required -->
+  </div>
+  <div class="form-group">
+    <label for="name">Image Item</label>
+    <input type="file" class="form-control" id="image" placeholder="" ><!-- [(ngModel)]="editedItem.picItem" name="picItem" required -->
+  </div>
+  <div class="form-group">
+    <label for="name">Type Item</label>
+    <input type="select" class="form-control" id="type" placeholder="" > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" required -->
+  </div>
+  <div class="form-group">
+    <label for="name">Price Item</label>
+    <input type="text" class="form-control" id="price" placeholder="" > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" required -->
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
+</form>

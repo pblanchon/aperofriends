@@ -1,34 +1,47 @@
-<div class="container-fluid text-center bg-dark" style="color: white;">
+<div class="container-fluid text-center " >
+  <div class="row">
+    <div class="col-sm" *ngFor="let item of itemList" >
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ item.picItem }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.nameItem }}</h5>
+          <p class="card-text">{{ item.typeItem }}</p>
+          <a href="#" class="btn btn-primary">{{ item.priceItem }} €</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-sm">
       <h3>Item</h3>
 
       <table class="table table-striped">
         <thead>
-        <tr>
-          <th>ID Item</th>
-          <th>Nom Item</th>
-          <th>Type Item</th>
-          <th>Prix Item</th>
-          <th>Editer</th>
-          <th>Supprimer</th>
-
-        </tr>
+          <tr>
+            <th>ID Item</th>
+            <th>Nom Item</th>
+            <th>Image Item</th>
+            <th>Type Item</th>
+            <th>Prix Item</th>
+            <th>Editer</th>
+            <th>Supprimer</th>
+          </tr>
         </thead>
 
         <tbody>
-        <tr >
-          <td>{{ item.idItem }}</td>
-          <td>{{ item.nameItem }}</td>
-          <td>{{ item.typeItem }}</td>
-          <td>{{ item.priceItem }}</td>
-          <td>
-            <button type="submit" class="btn btn-primary" >Modifier</button> <!-- routerLink="/auteur/{{auteur.idAuteur}}" -->
-          </td>
-          <td>
-            <button type="submit" class="btn btn-primary" routerLink="/livre" (click)="onDelete()">Supprimer</button>
-          </td>
-        </tr>
+          <tr *ngFor="let item of itemList">
+            <td>{{ item.idItem }}</td>
+            <td>{{ item.nameItem }}</td>
+            <td><img src="{{ item.picItem }}" alt="{{ item.picItem }}"></td>
+            <td>{{ item.typeItem }}</td>
+            <td>{{ item.priceItem }}</td>
+            <td>
+              <a routerLink="/item/{{item.idItem}}">Modifier</a> <!-- routerLink="/auteur/{{auteur.idAuteur}}" -->
+            </td>
+            <td>
+              <a routerLink="/item/{{item.idItem}}">Supprimer</a>
+            </td>
+          </tr>
         </tbody>
       </table>
 
@@ -36,24 +49,7 @@
     </div>
 
     <div class="col-sm">
-      <h3 id="newAuteur"  >Ajout d'un nouvel Item:</h3>
-      <h3 id="editAuteur" >Modifier un Item :</h3>
-
-      <form>
-        <div class="form-group">
-          <label for="name">Name Item</label>
-          <input type="text" class="form-control" id="name" placeholder="{{nameItem}}" ><!-- [(ngModel)]="editedAuteur.nomAuteur" name="nom" required  -->
-        </div>
-        <div class="form-group">
-          <label for="name">Type Item</label>
-          <input type="text" class="form-control" id="prenom" placeholder="{{prenomAut}}" > <!-- [(ngModel)]="editedAuteur.prenomAuteur" name="prenomAuteur" required-->
-        </div>
-        <div class="form-group">
-          <label for="name">Price Item</label>
-          <input type="text" class="form-control" id="adresse" placeholder="{{adresseAut}}" > <!-- [(ngModel)]="editedAuteur.adresseAuteur" name="adresseAuteur" required-->
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
-      </form>
+      <app-item-detail></app-item-detail>
     </div>
   </div>
 

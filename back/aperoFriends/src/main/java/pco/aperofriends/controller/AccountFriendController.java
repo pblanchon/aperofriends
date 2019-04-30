@@ -20,7 +20,6 @@ import pco.aperofriends.model.AccountFriend;
 import pco.aperofriends.repository.AccountFriendRepository;
 
 @RestController
-@RequestMapping("/accountFriend")
 @CrossOrigin("http://localhost:4200")
 public class AccountFriendController {
 	

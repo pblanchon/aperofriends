@@ -33,6 +33,8 @@ public class Item implements Serializable {
 
 	private int priceItem;
 	
+	private String picItem;
+	
 	@OneToOne(cascade=CascadeType.REFRESH)
 	@JsonIgnoreProperties("items")
 	@JoinColumn(name="idTypeItem")
@@ -82,21 +84,30 @@ public class Item implements Serializable {
 		this.priceItem = priceItem;
 	}
 
+	public String getPicItem() {
+		return picItem;
+	}
+
+	public void setPicItem(String picItem) {
+		this.picItem = picItem;
+	}
+	
 	public Item() {
 	}
 
-	public Item(int idItem, String nameItem, int priceItem, TypeItem typeItem, List<Bucket> buckets) {
+	public Item(int idItem, String nameItem, int priceItem, String picItem, TypeItem typeItem, List<Bucket> buckets) {
 		super();
 		this.idItem = idItem;
 		this.nameItem = nameItem;
 		this.priceItem = priceItem;
+		this.picItem = picItem;
 		this.typeItem = typeItem;
 		this.buckets = buckets;
 	}
 
 	@Override
 	public String toString() {
-		return "Item [idItem=" + idItem + ", nameItem=" + nameItem + ", priceItem=" + priceItem
+		return "Item [idItem=" + idItem + ", nameItem=" + nameItem + ", priceItem=" + priceItem + ", picItem=" + picItem
 				+ ", typeItem=" + typeItem + ", buckets=" + buckets + "]";
 	}
 

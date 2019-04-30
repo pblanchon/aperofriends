@@ -19,7 +19,6 @@ import pco.aperofriends.model.Item;
 import pco.aperofriends.repository.ItemRepository;
 
 @RestController
-@RequestMapping("/item")
 @CrossOrigin("http://localhost:4200")
 public class ItemController {
 	
@@ -28,7 +27,6 @@ public class ItemController {
 
 	/**
 	 * Methode qui renvois l'ensemble des éléments de la table item
-	 * 
 	 * @param model
 	 * @return items
 	 */
